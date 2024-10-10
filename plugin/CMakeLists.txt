@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(PluginTemplate VERSION 0.1.0)
+project(PluginTemplateREPL VERSION 0.1.0)
 
 juce_add_plugin(
     ${PROJECT_NAME}
@@ -10,7 +10,7 @@ juce_add_plugin(
     PLUGIN_MANUFACTURER_CODE Mthe
     PLUGIN_CODE Tmpl
     FORMATS VST3 AU Standalone
-    PRODUCT_NAME "Template"
+    PRODUCT_NAME ${PROJECT_NAME}
 )
 
 target_sources(

@@ -21,7 +21,7 @@ AudioPluginAudioProcessor::~AudioPluginAudioProcessor()
 //==============================================================================
 const juce::String AudioPluginAudioProcessor::getName() const
 {
-	return "Template";
+	return "PluginTemplateREPL";
 }
 
 bool AudioPluginAudioProcessor::acceptsMidi() const
