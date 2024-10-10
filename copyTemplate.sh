@@ -1,8 +1,9 @@
 #!/bin/bash
-if [ $# -gt 1 ]; then
+if [ $# -gt 2 ]; then
     parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
     dest_path=$1
     new_name=$2
+    new_code=$3
     mkdir $dest_path
     mkdir $dest_path/cmake
     cp -r $parent_path/cmake $dest_path
@@ -13,7 +14,9 @@ if [ $# -gt 1 ]; then
 
     sed -i '' "s/PluginTemplateREPL/$new_name/" $dest_path/CMakeLists.txt
     sed -i '' "s/PluginTemplateREPL/$new_name/" $dest_path/plugin/CMakeLists.txt
+    sed -i '' "s/Tmpl/$new_code/" $dest_path/plugin/CMakeLists.txt
     sed -i '' "s/PluginTemplateREPL/$new_name/" $dest_path/plugin/source/PluginProcessor.cpp
+
 else
-    echo "Please specify a destination directory and plugin name"
+    echo "Please specify a destination directory, and plugin name and code"
 fi
