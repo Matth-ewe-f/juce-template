@@ -10,7 +10,7 @@ juce_add_plugin(
     PLUGIN_MANUFACTURER_CODE Mthe
     PLUGIN_CODE Tmpl
     FORMATS VST3 AU Standalone
-    PRODUCT_NAME "Template"
+    PRODUCT_NAME ${PROJECT_NAME}
 )
 
 target_sources(
