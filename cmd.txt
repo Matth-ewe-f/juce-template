@@ -1,0 +1,4 @@
+Install dependencies:
+    cmake -S . -B build
+Build plugin:
+    cmake --build build
