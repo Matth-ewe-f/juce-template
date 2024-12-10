@@ -1,10 +1,10 @@
-#include "PluginProcessor.h"
 #include "PluginEditor.h"
 
 // === Lifecycle ==============================================================
 PluginEditor::PluginEditor (PluginProcessor &p)
     : AudioProcessorEditor(&p), processorRef(p)
 {
+    setLookAndFeel(&lookAndFeel);
     setSize(400, 300);
 }
 
