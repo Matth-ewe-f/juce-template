@@ -10,10 +10,27 @@ PluginProcessor::PluginProcessor()
 #endif
 		.withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
-	)
-{ }
+	),
+	tree(*this, nullptr, "PARAMETERS", createParameters())
+{
+#if PERFETTO
+    MelatoninPerfetto::get().beginSession();
+#endif
+}
 
-PluginProcessor::~PluginProcessor() { }
+PluginProcessor::~PluginProcessor()
+{
+#if PERFETTO
+    MelatoninPerfetto::get().endSession();
+#endif
+}
+
+juce::AudioProcessorValueTreeState::ParameterLayout
+PluginProcessor::createParameters()
+{
+	juce::AudioProcessorValueTreeState::ParameterLayout parameters;
+	return parameters;
+}
 
 // === Plugin Information =====================================================
 bool PluginProcessor::isBusesLayoutSupported(const BusesLayout &layouts) const
@@ -75,17 +92,15 @@ juce::AudioProcessorEditor *PluginProcessor::createEditor()
 // === State ==================================================================
 void PluginProcessor::getStateInformation(juce::MemoryBlock &destData)
 {
-	juce::ignoreUnused(destData);
-	// you can store state like this
-	// auto stream = juce::MemoryOutputStream(destData, true);
-	// stream.writeFloat(...);
+	auto state = tree.copyState();
+	std::unique_ptr<juce::XmlElement> xml(state.createXml());
+	copyXmlToBinary(*xml, destData);
 }
 
 void PluginProcessor::setStateInformation(const void *data, int sizeInBytes)
 {
-	juce::ignoreUnused(data, sizeInBytes);
-	// you can load state like this
-	// auto stream = juce::MemoryInputStream(data, (size_t)sizeInBytes, false);
-	// ... = stream.readFloat();
+	std::unique_ptr<juce::XmlElement> xml(getXmlFromBinary(data, sizeInBytes));
+	if (xml.get() != nullptr && xml->hasTagName(tree.state.getType()))
+		tree.replaceState(juce::ValueTree::fromXml(*xml));
 }
 

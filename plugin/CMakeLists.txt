@@ -16,6 +16,13 @@ juce_add_plugin(
 target_sources(
     ${PROJECT_NAME}
     PRIVATE
+        source/ui/CtmLookAndFeel.cpp
+        source/ui/CtmSlider.cpp
+        source/ui/SliderLabel.cpp
+        source/ui/CtmToggle.cpp
+        source/filters/ParameterBlueprint.cpp
+        source/parameterControls/ParameterControl.cpp
+        source/parameterControls/ParameterToggle.cpp
         source/PluginProcessor.cpp
         source/PluginEditor.cpp
 )
@@ -23,6 +30,9 @@ target_sources(
 target_include_directories(
     ${PROJECT_NAME}
     PRIVATE
+        include/ui
+        include/filters
+        include/parameterControls
         include
 )
 
@@ -30,6 +40,7 @@ target_link_libraries(
     ${PROJECT_NAME}
     PRIVATE
         juce::juce_audio_utils
+        juce::juce_dsp
     PUBLIC
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags

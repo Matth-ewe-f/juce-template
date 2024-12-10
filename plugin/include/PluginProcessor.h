@@ -4,9 +4,13 @@
 class PluginProcessor final : public juce::AudioProcessor
 {
 public:
+    // === Public Variables ===================================================
+    juce::AudioProcessorValueTreeState tree;
+
     // === Lifecycle ==========================================================
     PluginProcessor();
     ~PluginProcessor() override;
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
 
     // === Plugin Information =================================================
     inline const juce::String getName() const override
@@ -62,5 +66,8 @@ public:
     juce::AudioProcessorEditor* createEditor() override;
 
 private:
+#if PERFETTO
+    std::unique_ptr<perfetto::TracingSession> tracingSession;
+#endif
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginProcessor)
 };

@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.22)
 project(PluginTemplateREPL)
 set(CMAKE_CXX_STANDARD 23)
 set(LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+# set(CMAKE_BUILD_TYPE Debug)
 include(cmake/CPM.cmake)
 
 CPMAddPackage(
@@ -19,3 +20,13 @@ else()
 endif()
 
 add_subdirectory(plugin)
+
+include (FetchContent)
+
+FetchContent_Declare (melatonin_perfetto
+  GIT_REPOSITORY https://github.com/sudara/melatonin_perfetto.git
+  GIT_TAG origin/main)
+
+FetchContent_MakeAvailable (melatonin_perfetto)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE Melatonin::Perfetto)
