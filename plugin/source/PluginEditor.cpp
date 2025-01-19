@@ -5,7 +5,7 @@ PluginEditor::PluginEditor (PluginProcessor &p)
     : AudioProcessorEditor(&p), processorRef(p)
 {
     setLookAndFeel(&lookAndFeel);
-    setSize(400, 300);
+    setSize(400, 300); // make sure setSize is the last function called
 }
 
 PluginEditor::~PluginEditor() { }

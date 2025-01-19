@@ -6,11 +6,11 @@ class PluginEditor final : public juce::AudioProcessorEditor
 {
 public:
     // === Lifecycle ==========================================================
-    explicit PluginEditor (PluginProcessor&);
+    explicit PluginEditor(PluginProcessor&);
     ~PluginEditor() override;
 
     // === Graphics ===========================================================
-    void paint (juce::Graphics&) override;
+    void paint(juce::Graphics&) override;
     void resized() override;
 
 private:
