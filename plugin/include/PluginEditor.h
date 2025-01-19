@@ -16,6 +16,10 @@ public:
     void resized() override;
 
 private:
+    // === Layout Constants ===================================================
+    static const int width;
+    static const int height;
+    // === Member Variables ===================================================
     PluginProcessor& processorRef;
     CtmLookAndFeel lookAndFeel;
     

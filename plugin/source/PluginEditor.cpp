@@ -1,11 +1,14 @@
 #include "PluginEditor.h"
 
+const int PluginEditor::width = 400;
+const int PluginEditor::height = 300;
+
 // === Lifecycle ==============================================================
 PluginEditor::PluginEditor (PluginProcessor &p)
     : AudioProcessorEditor(&p), processorRef(p)
 {
     setLookAndFeel(&lookAndFeel);
-    setSize(400, 300); // make sure setSize is the last function called
+    setSize(width, height); // make sure setSize is the last function called
 }
 
 PluginEditor::~PluginEditor() { }
