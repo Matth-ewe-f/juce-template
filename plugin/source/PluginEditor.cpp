@@ -24,3 +24,16 @@ void PluginEditor::resized()
 {
     // control layout here
 }
+
+// === Helper Functions =======================================================
+void PluginEditor::addParameterControl(ParameterControl* control)
+{
+    addAndMakeVisible(control->slider);
+    addAndMakeVisible(control->label);
+}
+
+void PluginEditor::addComboBoxControl(ComboBoxControl* control)
+{
+    addAndMakeVisible(control->comboBox);
+    addAndMakeVisible(control->title);
+}
